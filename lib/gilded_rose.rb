@@ -1,7 +1,10 @@
+
+
 class GildedRose
+  attr_reader :items
 
   def initialize(items)
-    @items = items
+    @items = items.map { |item| TypedItem.new(item) }
   end
 
   def update_quality()
