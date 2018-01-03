@@ -1,9 +1,9 @@
-require File.join(File.dirname(__FILE__), 'typed_factory')
+require File.join(File.dirname(__FILE__), 'typed_item_factory')
 
 class GildedRose
   attr_reader :items
 
-  def initialize(items, factory = TypedFactory.new)
+  def initialize(items, factory = TypedItemFactory.new)
     @items = convert(items, factory)
   end
 

@@ -1,15 +1,7 @@
 class DefaultItem
   attr_reader :item, :params
 
-  PARAMS = {
-    sell_in_incr: -1,
-    quality_incr: -1,
-    expiry_mul: 2,
-    quality_max: 50,
-    expiry: 0,
-  }
-
-  def initialize(item, params = PARAMS)
+  def initialize(item, params)
     @item = item
     @params = params
   end

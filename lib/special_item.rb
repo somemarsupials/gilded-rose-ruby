@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), 'default_item')
 
 # legendary items do not change in quality or sell-by!
 class LegendaryItem < DefaultItem
-  def initialize(item, params)
+  def initialize(item, params) 
     super(item, params)
   end
 

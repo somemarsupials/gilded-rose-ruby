@@ -4,6 +4,14 @@ require File.join(File.dirname(__FILE__), 'special_item')
 class TypedItemFactory
   attr_reader :item, :type
 
+  PARAMS = {
+    sell_in_incr: -1,
+    quality_incr: -1,
+    expiry_mul: 2,
+    quality_max: 50,
+    expiry: 0,
+  }
+
   TYPES = {
     /aged brie/ => AgedBrieItem,
     /sulfuras/ => LegendaryItem,
@@ -16,7 +24,7 @@ class TypedItemFactory
   end
 
   def generate(item)
-    identify(item.name).new(item)
+    identify(item.name).new(item, params = PARAMS)
   end
 
   def identify(name, default = DefaultItem)

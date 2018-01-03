@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), '..', 'lib', 'typed_factory') 
+require File.join(File.dirname(__FILE__), '..', 'lib', 'typed_item_factory') 
 
 describe TypedItemFactory do
   let(:item) { double(:item, name: 'default') }
@@ -17,7 +17,7 @@ describe TypedItemFactory do
       end
 
       it 'creates new typed item with item' do
-        expect(type).to receive(:new).with(item)
+        expect(type).to receive(:new).with(item, described_class::PARAMS)
       end
     end
 
