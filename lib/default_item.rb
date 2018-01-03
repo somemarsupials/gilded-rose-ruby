@@ -30,7 +30,7 @@ class DefaultItem
   end
 
   def alter_quality(value)
-    @item.quality = [quality + value, @params[:quality_max]].min
+    @item.quality = [[quality + value, @params[:quality_max]].min, 0].max
   end
 
   def quality

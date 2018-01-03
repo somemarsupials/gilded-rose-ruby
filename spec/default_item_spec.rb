@@ -90,5 +90,13 @@ describe DefaultItem do
         expect(item).to receive(:quality=).with(100)
       end
     end
+
+    describe 'when below 0' do
+      before(:each) { allow(item).to receive(:quality).and_return(-50) }
+
+      it 'sets quality to 0' do
+        expect(item).to receive(:quality=).with(0)
+      end
+    end
   end
 end

@@ -15,7 +15,7 @@ class TypedItemFactory
   TYPES = {
     /aged brie/ => AgedBrieItem,
     /sulfuras/ => LegendaryItem,
-    /backstage_passes/ => BackstagePassesItem,
+    /backstage passes/ => BackstagePassesItem,
     /conjured/ => ConjuredItem,
   }
 

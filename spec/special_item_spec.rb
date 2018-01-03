@@ -42,14 +42,11 @@ describe BackstagePassesItem do
   include_examples 'default item'
 
   subject do 
-    described_class.new(item, params, five_or_less: 5, ten_or_less: 10)
+    described_class.new(item, params, five_or_less: 5, 
+                        ten_or_less: 10, normal: 1)
   end
 
   describe '#initialize (subclass)' do
-    before(:each) do 
-      described_class.new(item, params, five_or_less: 5, ten_or_less: 10)
-    end
-
     describe 'when created' do
       it 'sets five_or_less' do
         expect(subject.params[:incr_5_or_less]).to eq 5
@@ -57,6 +54,10 @@ describe BackstagePassesItem do
       
       it 'sets ten_or_less' do
         expect(subject.params[:incr_10_or_less]).to eq 10
+      end
+
+      it 'sets ten_or_less' do
+        expect(subject.params[:quality_incr]).to eq 1
       end
     end
   end
@@ -84,7 +85,7 @@ describe BackstagePassesItem do
     describe 'when 10 days away' do
       before(:each) { allow(item).to receive(:sell_in).and_return(10) }
 
-      it 'uses five_or_less quality' do
+      it 'uses ten_or_less quality' do
         expect(item).to receive(:quality=).with(10)
       end
     end
@@ -92,8 +93,8 @@ describe BackstagePassesItem do
     describe 'when more than 10 days away' do
       before(:each) { allow(item).to receive(:sell_in).and_return(11) }
 
-      it 'uses five_or_less quality' do
-        expect(item).to receive(:quality=).with(3)
+      it 'uses default quality' do
+        expect(item).to receive(:quality=).with(1)
       end
     end
   end

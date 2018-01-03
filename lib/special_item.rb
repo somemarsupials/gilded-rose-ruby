@@ -25,10 +25,11 @@ end
 # backstage passes change in value as the event approaches
 # but they retain no value after the event
 class BackstagePassesItem < DefaultItem
-  def initialize(item, params, ten_or_less: 2, five_or_less: 3)
+  def initialize(item, params, ten_or_less: 2, five_or_less: 3, normal: 1)
     params = params.clone
     params[:incr_5_or_less] = five_or_less
     params[:incr_10_or_less] = ten_or_less
+    params[:quality_incr] = normal
     super(item, params)
   end
 
