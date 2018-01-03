@@ -1,24 +1,31 @@
 require File.join(File.dirname(__FILE__), '..', 'lib', 'default_item') 
 
+require 'set'
+
 class MockItem
   attr_accessor :sell_in, :quality
 end
 
-describe DefaultItem do
+shared_examples 'default item' do
   let(:item) { MockItem.new }
-  let(:params) do 
-    {
-      sell_in_incr: 1, quality_incr: 3, expiry_mul: 2, 
-      quality_max: 100, expiry: 0,
-    }
-  end
+  let(:params) {{ 
+    sell_in_incr: 1, quality_incr: 3, expiry_mul: 2, 
+    quality_max: 100, expiry: 0
+  }}
 
-  subject { described_class.new(item, params: params) }
+  subject { described_class.new(item, params) }
 
   describe '#initialize' do
     describe 'when created' do
+      let(:original_keys) { params.keys.to_set }
+      let(:new_keys) { subject.params.keys.to_set }
+
       it 'has item' do
         expect(subject.item).to eq item
+      end
+
+      it 'has params' do
+        expect(new_keys).to be_superset original_keys
       end
     end
   end
@@ -38,6 +45,11 @@ describe DefaultItem do
       end
     end
   end
+end
+
+
+describe DefaultItem do
+  include_examples 'default item'
 
   describe '#update_sell_in' do
     before(:each) { allow(item).to receive(:sell_in).and_return(0) }
