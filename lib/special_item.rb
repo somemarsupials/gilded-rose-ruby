@@ -15,9 +15,10 @@ end
 
 # aged brie gets more valuable over time
 class AgedBrieItem < DefaultItem
-  def initialize(item, params, multiplier: -1)
+  def initialize(item, params, multiplier: -1, expiry_mul: 1)
     params = params.clone
     params[:quality_incr] *= multiplier
+    params[:expiry_mul] = expiry_mul
     super(item, params)
   end
 end

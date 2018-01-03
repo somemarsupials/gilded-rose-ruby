@@ -28,11 +28,17 @@ describe AgedBrieItem do
   include_examples 'default item'
 
   describe '#initialize (subclass)' do
-    before(:each) { described_class.new(item, params, multiplier: -1) }
+    subject do 
+      described_class.new(item, params, multiplier: -1, expiry_mul: 3)
+    end
 
     describe 'when created' do
       it 'multiplies increment by multiplier' do
         expect(subject.params[:quality_incr]).to eq -3
+      end
+
+      it 'multiplies increment by multiplier' do
+        expect(subject.params[:expiry_mul]).to eq 3
       end
     end
   end
