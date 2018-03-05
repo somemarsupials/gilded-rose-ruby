@@ -1,6 +1,6 @@
 # Gilded Rose challenge!
 
-This code is based on the initial code located at [this](https://github.com/emilybache/GildedRose-Refactoring-Kata).
+This code is based on the initial code located at [this](https://github.com/emilybache/GildedRose-Refactoring-Kata)
 repository. The rules of the kata are as follows (from [here](https://github.com/emilybache/GildedRose-Refactoring-Kata/blob/master/GildedRoseRequirements.txt)):
 
 ## Gilded Rose Requirements Specification
