@@ -55,7 +55,7 @@ system is much more extensible, following the principle of being *open for exten
 
 I'll provide a quick run-down of the classes that I've created and what they do.
 
-### DefaultItem
+### DefaultItem
 
 The DefaultItem implements the behaviour of a normal item. It describes the way that an item ages
 and changes in value under normal circumstances. The item works on the basis of parameters that
@@ -63,7 +63,7 @@ are externally injected, describing things like how quality declines over time. 
 `update` method that is called to ensure that it changes its quality and sell-in date. Internally, 
 this calls `update_sell_in` and `update_quality` methods.
 
-### Special items
+### Special items
 
 These are a series of subclasses of the DefaultItem class. In each case, the subclass is either 
 initialised with different parameters or has methods added or overridden. In three of the four
