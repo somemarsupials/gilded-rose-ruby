@@ -1,10 +1,9 @@
-This code is based on the initial code located at 
-[this](https://github.com/emilybache/GildedRose-Refactoring-Kata).
-repository. The rules of the kata are as follows:
+# Gilded Rose challenge!
 
-======================================
-Gilded Rose Requirements Specification
-======================================
+This code is based on the initial code located at [this](https://github.com/emilybache/GildedRose-Refactoring-Kata).
+repository. The rules of the kata are as follows (from [here](https://github.com/emilybache/GildedRose-Refactoring-Kata/blob/master/GildedRoseRequirements.txt)):
+
+## Gilded Rose Requirements Specification
 
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a
 prominent city ran by a friendly innkeeper named Allison. We also buy and sell only the finest goods.
@@ -40,3 +39,43 @@ for you).
 
 Just for clarification, an item can never have its Quality increase above 50, however "Sulfuras" is a
 legendary item and as such its Quality is 80 and it never alters.
+
+## My solution
+
+The rules are quite clear about the fact that we cannot mess around with the Item class, which makes
+problem a little bit more challenging to solve. My solution to this issue was the create the concept
+of a *typed item*, which is an object that contains an item and a type, along with some parameters to
+control how it behaves. This is effectively a wrapper around the item class, allowing us to implement
+the behaviour that we need while keeping everyone happy. 
+
+It turns out that the logical behaviour of 
+normal items and special items can be modelled on a common set of parameters. This is useful because
+we account for most special cases by changing parameters rather than logic. This means that the new
+system is much more extensible, following the principle of being *open for extension, not modification*. 
+
+I'll provide a quick run-down of the classes that I've created and what they do.
+
+### DefaultItem
+
+The DefaultItem implements the behaviour of a normal item. It describes the way that an item ages
+and changes in value under normal circumstances. The item works on the basis of parameters that
+are externally injected, describing things like how quality declines over time. It provides an 
+`update` method that is called to ensure that it changes its quality and sell-in date. Internally, 
+this calls `update_sell_in` and `update_quality` methods.
+
+### Special items
+
+These are a series of subclasses of the DefaultItem class. In each case, the subclass is either 
+initialised with different parameters or has methods added or overridden. In three of the four
+cases, we don't have to override the `update_sell_in` and `update_quality` methods because we can
+implement the behaviour we need by tweaking parameters or the `quality_change` method.
+
+### TypedItemFactory
+
+This builds typed items from Items. It uses regular expressions to work out what type an item
+should be assigned and then generates an array of correspondingly typed items.
+
+### GildedRose
+
+Now, all that GildedRose needs to do is convert Items to typed items as it is initialised. It
+then calls `update` on each item once per tick (i.e. per day)!
